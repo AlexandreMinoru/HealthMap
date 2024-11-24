@@ -1,5 +1,5 @@
 
-import { createAccount } from "./firebase/firebaseAuthenticationSetup.js";
+import { createAccount } from "../Model/firebase/firebaseAuthenticationSetup.js";
 
 function validateSignup(event) {
     event.preventDefault(); // Evita a recarga do formulário

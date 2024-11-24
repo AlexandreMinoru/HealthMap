@@ -29,7 +29,7 @@ export function createAccount(email, password){
         alert("Conta criada com sucesso")
     }).catch((error) =>{
         const errorMessage = error.message;
-        alert(errorMessage)
+        alert("Email já cadastrado")
     })
 }
 
