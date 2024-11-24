@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+        
+    <title>HealthMap</title>
+
+    <style>
+        /* Estilos globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #f4f4f4;
+        }
+        .top-bar {
+            padding: 20px;
+            background-color: #202740;
+            color: #fff;
+            text-align: center;
+        }
+        .top-bar h1 {
+            margin-bottom: 10px;
+        }
+        .top-bar p {
+            margin: 5px 0;
+        }
+        .menu {
+            position: fixed;
+            width: 32px;
+            padding: 12px 8px;
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background-color: #202740;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+            transition: transform 0.5s;
+            border-radius: 50px;
+            z-index: 999;
+            transform: translateY(-50%);
+            top: 50%;
+        }
+        .menu-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 50%;
+            color: #fff;
+        }
+        .menu-link.active {
+            background-color: #1e94d2;
+        }
+        .menu-link:hover {
+            background-color: #131826;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+        .carousel-container, .chatbot-container {
+            flex: 1;
+        }
+        .carousel {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.5s ease;
+        }
+        .chatbot-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            height: 100%;
+        }
+        .chatbot-messages {
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .chat-input {
+            width: calc(100% - 90px);
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .support-carousel {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .supporter {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .supporter img {
+            width: 100px;
+            height: auto;
+        }
+        .map-container {
+            margin: 20px 0;
+            width: 100%;
+            height: 450px;
+        }
+        @media screen and (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+            .carousel-container, .chatbot-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Topo com nome do app, email e contato -->
+    <div class="top-bar">
+        <div class="app-info">
+            <h1>HealthMap</h1>
+            <p>Email: contato@healthmap.com</p>
+            <p>Contato: +55 (11) 1234-5678</p>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="#" class="menu-link">
+            <ion-icon name="home-outline"></ion-icon>
+        </a>
+        <a href="map.html" class="menu-link">
+            <ion-icon name="flash"></ion-icon>
+        </a>
+        <a href="create-case.html" class="menu-link">
+            <ion-icon name="code-working"></ion-icon>
+        </a>
+        <a href="bulb.html" class="menu-link">
+            <ion-icon name="bulb-outline"></ion-icon>
+        </a>
+        <a href="flash-outline.html" class="menu-link">
+            <ion-icon name="flash-outline"></ion-icon>
+        </a>
+    </div>
+
+    <div class="header">
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="../images/On Our Hand.png" class="carousel-img" alt="Imagem 1">
+                <img src="../images/On Our Hand (1).png" class="carousel-img" alt="Imagem 2">
+                <img src="https://agenciabrasilia.df.gov.br/wp-conteudo/uploads/2024/01/dengue-hemo.png" class="carousel-img" alt="Imagem 3">
+            </div>
+        </div>
+
+        <div class="chatbot-container">
+            <div class="chatbot-box">
+                <h2>Precauções contra a Dengue</h2>
+                <div class="chatbot-messages" id="chatbot-messages">
+                    <div class="bot-message">
+                        <p><strong>Bot:</strong> Olá! Como posso ajudar? Pergunte sobre precauções contra a dengue.</p>
+                    </div>
+                </div>
+                <input type="text" id="user-input" placeholder="Digite sua pergunta..." class="chat-input">
+                <button onclick="sendMessage()">Enviar</button>
+
+                <!-- Carrossel de apoiadores dentro do chatbot-box -->
+                <div class="support-carousel">
+                    <h3>Nossos Apoiadores</h3>
+                    <div class="supporter">
+                        <a href="https://www.sp.senac.br/" target="_blank">
+                            <img src="https://tse3.mm.bing.net/th?id=OIP.DrQTBEOfGEc9e_faw9n2HAHaE3&pid=Api&P=0&h=180" alt="Senac">
+                            <p>Senac</p>
+                        </a>
+                    </div>
+                    <div class="supporter">
+                        <a href="https://dengue.org.br/" target="_blank">
+                            <img src="https://tse2.mm.bing.net/th?id=OIP.jC3giN3aAXUiyLeflo-vIQHaHa&pid=Api&P=0&h=180" alt="Site Oficial Dengue">
+                            <p>Site Oficial Dengue</p>
+                        </a>
+                    </div>
+                    <div class="supporter">
+                        <a href="https://aacd.org.br/" target="_blank">
+                            <img src="https://tse1.mm.bing.net/th?id=OIP.trpiNQstjvQ5Q8x0QxAG7wHaH8&pid=Api&P=0&h=180" alt="AACD">
+                            <p>AACD</p>
+                        </a>
+                    </div>
+                    <div class="supporter">
+                        <a href="https://sosamazonia.org.br/" target="_blank">
+                            <img src="https://tse1.mm.bing.net/th?id=OIP.OFEnDYnC_jX78OKnm0Q3hQAAAA&pid=Api&P=0&h=180" alt="SOS Amazonia">
+                            <p>SOS Amazonia</p>
+                        </a>
+                    </div>
+                    <div>
+                        <h1>Funções</h1>
+                    </div>
+                    <div class="supporter">
+                        <a href="../../index.html" >
+                            <img src="data:image/jpeg;base64,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" alt="SOS Amazonia">
+                            <p>Logout</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.9027388461944!2d-46.634774125254515!3d-23.550520614672013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5854a65f9e69%3A0x4db3c57d90a0b4ab!2sPra%C3%A7a%20da%20S%C3%A9!5e0!3m2!1spt-BR!2sbr!4v1694004079054!5m2!1spt-BR!2sbr"
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <div class="container">
+        <!-- Conteúdo da página -->
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Carrossel de imagens
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.carousel-img');
+        const imageCount = images.length;
+
+        function changeImage() {
+            images[currentImageIndex].style.opacity = '0';
+            currentImageIndex = (currentImageIndex + 1) % imageCount;
+            images[currentImageIndex].style.opacity = '1';
+        }
+
+        setInterval(changeImage, 3000); // Alternar imagem a cada 3 segundos
+
+        // Chatbot simples com respostas personalizadas
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            if (userInput) {
+                // Adiciona a mensagem do usuário
+                const userMessage = `<div class="user-message"><p><strong>Você:</strong> ${userInput}</p></div>`;
+                chatbotMessages.innerHTML += userMessage;
+
+                // Respostas automáticas do chatbot
+                let botResponse = '';
+
+                if (userInput.toLowerCase().includes('prevenção')) {
+                    botResponse = 'Para prevenir a dengue, evite água parada e use repelente!';
+                } else if (userInput.toLowerCase().includes('sintomas')) {
+                    botResponse = 'Os sintomas da dengue incluem febre alta, dores musculares e nas articulações.';
+                } else if (userInput.toLowerCase().includes('olá')) {
+                    botResponse = 'Olá! Como posso ajudar você hoje?';
+                } else if (userInput.toLowerCase().includes('bom dia')) {
+                    botResponse = 'Bom dia! Espero que você esteja bem. Como posso ajudar?';
+                } else if (userInput.toLowerCase().includes('boa tarde')) {
+                    botResponse = 'Boa tarde! Como posso ajudar você?';
+                } else if (userInput.toLowerCase().includes('boa noite')) {
+                    botResponse = 'Boa noite! Está precisando de ajuda com algo?';
+                } else if (userInput.toLowerCase().includes('mal')) {
+                    botResponse = 'Sinto muito que você esteja se sentindo mal. É importante consultar um médico se você estiver com sintomas graves.';
+                } else {
+                    botResponse = 'Desculpe, não entendi. Tente perguntar sobre prevenção, sintomas ou como você está se sentindo.';
+                }
+
+                // Adiciona a resposta do bot
+                const botMessage = `<div class="bot-message"><p><strong>Bot:</strong> ${botResponse}</p></div>`;
+                chatbotMessages.innerHTML += botMessage;
+
+                // Limpa o campo de entrada
+                document.getElementById('user-input').value = '';
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll automático para o final
+            }
+        }
+    </script>
+</body>
+
+</html>

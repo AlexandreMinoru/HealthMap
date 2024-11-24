@@ -1,0 +1,8 @@
+Olá professor, tudo bem?
+
+Nós por meio desse comunicado viemos lhe informar que acabamos precisando 
+deixar o "index.html" fora do modelo MVC devido a como funciona a hospedagem por meio do GitHub.
+
+O local dele correto seria dentro de View/pages/.
+
+Desde já agradecemos a compreensão.
