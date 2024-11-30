@@ -1,1 +1,1 @@
-# Corona-Master
+# HealthMap
