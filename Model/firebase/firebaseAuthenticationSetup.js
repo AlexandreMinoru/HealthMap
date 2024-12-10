@@ -37,7 +37,11 @@ export function login(email, password){
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password).then((userCredential) =>{
-        window.location.href = "/HealthMap/View/pages/home.html"
+
+        /*Professor, aqui para que o código funcione, é necessario retirar o "/HealthMap"
+        *Nós precisamos adicionar esse caminho para que a hospedagem do GitHub funcione, agradecemos a compreensão
+        */
+        window.location.href = "../../View/pages/home.html"
     }).catch((error) =>{
         const errorMessage = error.message;
         alert("Email/senha errados")

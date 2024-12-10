@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            flex-direction: column;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .title .health {
+            color: blue; /* Cor azul para "Health" */
+        }
+
+        .title .map {
+            color: red;  /* Cor vermelha para "Map" */
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-container input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #357ab8;
+        }
+
+        .login-container .signup {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .login-container .signup a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .login-container .signup a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        <span class="health">Health</span><span class="map">Map</span>
+    </div>
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <form >
+            <input type="text" name="username" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="signup">
+            Não tem uma conta? <a href="./register.html">Cadastrar conta</a>
+        </div>
+    </div>
+    <script src="../../Controller/login.js" type="module"></script>
+</body>
+</html>
